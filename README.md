@@ -1,2 +1,2 @@
 # Proyecto-CAN
-En este proyecto se desarrolla un metro automático por medio de CAN, donde la comunicación entre los vagones y las estaciones será por medio del protocolo Uart por medio de módulos bluetooth 
+Este proyecto se centra en el desarrollo de un sistema de metro automatizado utilizando la red Controller Area Network (CAN). La comunicación entre los vagones y las estaciones se llevará a cabo mediante el protocolo UART, utilizando módulos Bluetooth.
