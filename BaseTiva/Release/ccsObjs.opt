@@ -1,0 +1,8 @@
+"./tm4c1294ncpdt_startup_ccs.obj"
+"./Biblios/src/GPIO.obj"
+"./Biblios/src/I2C.obj"
+"./Biblios/src/NVIC.obj"
+"./Biblios/src/UART.obj"
+"./Biblios/src/main.obj"
+"../tm4c1294ncpdt.cmd"
+-llibc.a
