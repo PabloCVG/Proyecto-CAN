@@ -13,6 +13,7 @@ ORDERED_OBJS += \
 "./tm4c1294ncpdt_startup_ccs.obj" \
 "./src/GPIO.obj" \
 "./src/I2C.obj" \
+"./src/IEEE_CAN.obj" \
 "./src/NVIC.obj" \
 "./src/SSI.obj" \
 "./src/TIMER.obj" \
@@ -151,8 +152,8 @@ ProyectoUno_SEmb.out: $(OBJS) $(CMD_SRCS) $(GEN_CMDS)
 # Other Targets
 clean:
 	-$(RM) $(EXE_OUTPUTS__QUOTED)
-	-$(RM) "tm4c1294ncpdt_startup_ccs.obj" "src\GPIO.obj" "src\I2C.obj" "src\NVIC.obj" "src\SSI.obj" "src\TIMER.obj" "src\UART.obj" "src\main.obj" 
-	-$(RM) "tm4c1294ncpdt_startup_ccs.d" "src\GPIO.d" "src\I2C.d" "src\NVIC.d" "src\SSI.d" "src\TIMER.d" "src\UART.d" "src\main.d" 
+	-$(RM) "tm4c1294ncpdt_startup_ccs.obj" "src\GPIO.obj" "src\I2C.obj" "src\IEEE_CAN.obj" "src\NVIC.obj" "src\SSI.obj" "src\TIMER.obj" "src\UART.obj" "src\main.obj" 
+	-$(RM) "tm4c1294ncpdt_startup_ccs.d" "src\GPIO.d" "src\I2C.d" "src\IEEE_CAN.d" "src\NVIC.d" "src\SSI.d" "src\TIMER.d" "src\UART.d" "src\main.d" 
 	-@echo 'Finished clean'
 	-@echo ' '
 

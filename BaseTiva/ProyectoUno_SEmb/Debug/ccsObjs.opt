@@ -1,6 +1,7 @@
 "./tm4c1294ncpdt_startup_ccs.obj"
 "./src/GPIO.obj"
 "./src/I2C.obj"
+"./src/IEEE_CAN.obj"
 "./src/NVIC.obj"
 "./src/SSI.obj"
 "./src/TIMER.obj"

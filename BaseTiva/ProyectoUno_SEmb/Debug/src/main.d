@@ -13,11 +13,10 @@ src/main.obj: C:/ti/ccs1220/ccs/tools/compiler/ti-cgt-arm_20.2.7.LTS/include/mac
 src/main.obj: C:/ti/ccs1220/ccs/tools/compiler/ti-cgt-arm_20.2.7.LTS/include/sys/_stdint.h
 src/main.obj: C:/ti/ccs1220/ccs/tools/compiler/ti-cgt-arm_20.2.7.LTS/include/stdbool.h
 src/main.obj: C:/Users/aresi/workspace_v12/ProyectoUno_SEmb/inclu/GPIO.h
-src/main.obj: C:/Users/aresi/workspace_v12/ProyectoUno_SEmb/inclu/TIMER.h
 src/main.obj: C:/Users/aresi/workspace_v12/ProyectoUno_SEmb/inclu/NVIC.h
-src/main.obj: C:/Users/aresi/workspace_v12/ProyectoUno_SEmb/inclu/SSI.h
-src/main.obj: C:/Users/aresi/workspace_v12/ProyectoUno_SEmb/inclu/Macros.h
+src/main.obj: C:/Users/aresi/workspace_v12/ProyectoUno_SEmb/inclu/UART.h
 src/main.obj: C:/ti/TivaWare_C_Series-2.2.0.295/inc/tm4c1294ncpdt.h
+src/main.obj: C:/Users/aresi/workspace_v12/ProyectoUno_SEmb/inclu/Macros.h
 
 ../src/main.c:
 
@@ -45,13 +44,11 @@ C:/ti/ccs1220/ccs/tools/compiler/ti-cgt-arm_20.2.7.LTS/include/stdbool.h:
 
 C:/Users/aresi/workspace_v12/ProyectoUno_SEmb/inclu/GPIO.h:
 
-C:/Users/aresi/workspace_v12/ProyectoUno_SEmb/inclu/TIMER.h:
-
 C:/Users/aresi/workspace_v12/ProyectoUno_SEmb/inclu/NVIC.h:
 
-C:/Users/aresi/workspace_v12/ProyectoUno_SEmb/inclu/SSI.h:
-
-C:/Users/aresi/workspace_v12/ProyectoUno_SEmb/inclu/Macros.h:
+C:/Users/aresi/workspace_v12/ProyectoUno_SEmb/inclu/UART.h:
 
 C:/ti/TivaWare_C_Series-2.2.0.295/inc/tm4c1294ncpdt.h:
+
+C:/Users/aresi/workspace_v12/ProyectoUno_SEmb/inclu/Macros.h:
 

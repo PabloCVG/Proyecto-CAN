@@ -33,7 +33,7 @@ float UART_Baud_Rate_Frac(float Baud_Rate_Fraccion){
 }
 
 /*Realizar operación
- *  BRD = BRDI + BRDF = UARTSysClk / (ClkDiv * Baud Rate)*/
+ *  BRD = BRDI + BRDF = UARTSysClk / (ClkDiv * Baud Rate); ClkDiv = 16 si HSI no esta habilitado en el registro de reloj*/
 void UART_Set_Baud_Rate(uint8_t UARTx_clk, uint32_t Baud_Rate_Entero, float Baud_Rate_Fraccion){
 
     /*Considerando que la frecuencia inicial es de 16 MHz*/
@@ -108,6 +108,10 @@ void UART_Conf_Line(uint8_t UARTx_clk, bool Two_Stop, bool FIFO,
                     bool Parity_Enable, bool Parity_Select, uint16_t Word_Len){
 
     switch(UARTx_clk){
+  /*WORD_LEN : 0x00 to 5 bits
+             : 0x40 to 6 bits
+             : 0x50 to 7 bits
+             : 0x60 to 8 bits*/
     case UART0_clk:
 
         SET_BR(UART0_LCRH_R, (Word_Len & 0x60)); //Longitud de la palabra en bits, escrito en Hexa
@@ -123,6 +127,10 @@ void UART_Conf_Line(uint8_t UARTx_clk, bool Two_Stop, bool FIFO,
         break;
 
     case UART1_clk:
+        /*WORD_LEN : 0x00 to 5 bits
+                   : 0x40 to 6 bits
+                   : 0x50 to 7 bits
+                   : 0x60 to 8 bits*/
         SET_BR(UART1_LCRH_R, (Word_Len & 0x60)); //Longitud de la palabra en bits, escrito en Hexa
 
         if(Parity_Enable == true)
@@ -136,6 +144,10 @@ void UART_Conf_Line(uint8_t UARTx_clk, bool Two_Stop, bool FIFO,
         break;
 
     case UART2_clk:
+        /*WORD_LEN : 0x00 to 5 bits
+                   : 0x40 to 6 bits
+                   : 0x50 to 7 bits
+                   : 0x60 to 8 bits*/
         SET_BR(UART2_LCRH_R, (Word_Len & 0x60)); //Longitud de la palabra en bits, escrito en Hexa
 
         if(Parity_Enable == true)
@@ -149,6 +161,10 @@ void UART_Conf_Line(uint8_t UARTx_clk, bool Two_Stop, bool FIFO,
         break;
 
     case UART3_clk:
+        /*WORD_LEN : 0x00 to 5 bits
+                   : 0x40 to 6 bits
+                   : 0x50 to 7 bits
+                   : 0x60 to 8 bits*/
         SET_BR(UART3_LCRH_R, (Word_Len & 0x60)); //Longitud de la palabra en bits, escrito en Hexa
 
         if(Parity_Enable == true)
@@ -162,6 +178,10 @@ void UART_Conf_Line(uint8_t UARTx_clk, bool Two_Stop, bool FIFO,
         break;
 
     case UART4_clk:
+        /*WORD_LEN : 0x00 to 5 bits
+                   : 0x40 to 6 bits
+                   : 0x50 to 7 bits
+                   : 0x60 to 8 bits*/
         UART4_LCRH_R |= Word_Len; //Longitud de la palabra en bits, escrito en Hexa
 
         if(Parity_Enable == true)
@@ -175,6 +195,10 @@ void UART_Conf_Line(uint8_t UARTx_clk, bool Two_Stop, bool FIFO,
         break;
 
     case UART5_clk:
+        /*WORD_LEN : 0x00 to 5 bits
+                   : 0x40 to 6 bits
+                   : 0x50 to 7 bits
+                   : 0x60 to 8 bits*/
         SET_BR(UART5_LCRH_R, (Word_Len & 0x60)); //Longitud de la palabra en bits, escrito en Hexa
 
         if(Parity_Enable == true)
@@ -188,6 +212,10 @@ void UART_Conf_Line(uint8_t UARTx_clk, bool Two_Stop, bool FIFO,
         break;
 
     case UART6_clk:
+        /*WORD_LEN : 0x00 to 5 bits
+                   : 0x40 to 6 bits
+                   : 0x50 to 7 bits
+                   : 0x60 to 8 bits*/
         SET_BR(UART6_LCRH_R, (Word_Len & 0x60)); //Longitud de la palabra en bits, escrito en Hexa
 
         if(Parity_Enable == true)
@@ -201,6 +229,10 @@ void UART_Conf_Line(uint8_t UARTx_clk, bool Two_Stop, bool FIFO,
         break;
 
     case UART7_clk:
+        /*WORD_LEN : 0x00 to 5 bits
+                   : 0x40 to 6 bits
+                   : 0x50 to 7 bits
+                   : 0x60 to 8 bits*/
         SET_BR(UART7_LCRH_R, (Word_Len & 0x60)); //Longitud de la palabra en bits, escrito en Hexa
 
         if(Parity_Enable == true)
@@ -242,13 +274,15 @@ void UART_Interrup(uint8_t UARTx_clk, uint8_t FIFO_Tx, uint8_t FIFO_Rx, bool End
         SET_BR(NVIC_PRI1_R, (Prio << 13));
 
         /*Inicializar*/
+        SET_BIT(UART0_CTL_R, 9); //Recepción
+        SET_BIT(UART0_CTL_R, 8); //Transmisión
         SET_BIT(UART0_CTL_R, 0);
         break;
 
     case UART1_clk:
         /*FIFO INTERRUPCIÓN*/
-        UART1_IFLS_R = (FIFO_Tx & 0x07); //Int en la FIFO, parte de transmisión
-        UART1_IFLS_R = (FIFO_Rx & 0x038); //Int en la FIFO, parte de recepción
+        //UART1_IFLS_R = (FIFO_Tx & 0x07); //Int en la FIFO, parte de transmisión
+        //UART1_IFLS_R = (FIFO_Rx & 0x038); //Int en la FIFO, parte de recepción
 
         /*ENMASCARAMIENTO*/
         if(End_Tx == true)
@@ -267,13 +301,15 @@ void UART_Interrup(uint8_t UARTx_clk, uint8_t FIFO_Tx, uint8_t FIFO_Rx, bool End
         SET_BR(NVIC_PRI1_R, (Prio << 21));
 
         /*Inicializar*/
+        SET_BIT(UART1_CTL_R, 9); //Recepción
+        SET_BIT(UART1_CTL_R, 8); //Transmisión
         SET_BIT(UART1_CTL_R, 0);
         break;
 
     case UART2_clk:
         /*FIFO INTERRUPCIÓN*/
-        UART2_IFLS_R = (FIFO_Tx & 0x07); //Int en la FIFO, parte de transmisión
-        UART2_IFLS_R = (FIFO_Rx & 0x038); //Int en la FIFO, parte de recepción
+        //UART2_IFLS_R = (FIFO_Tx & 0x07); //Int en la FIFO, parte de transmisión
+        //UART2_IFLS_R = (FIFO_Rx & 0x038); //Int en la FIFO, parte de recepción
 
         /*ENMASCARAMIENTO*/
         if(End_Tx == true)
@@ -292,13 +328,15 @@ void UART_Interrup(uint8_t UARTx_clk, uint8_t FIFO_Tx, uint8_t FIFO_Rx, bool End
         SET_BR(NVIC_PRI8_R, (Prio << 13));
 
         /*Inicializar*/
+        SET_BIT(UART2_CTL_R, 9); //Recepción
+        SET_BIT(UART2_CTL_R, 8); //Transmisión
         SET_BIT(UART2_CTL_R, 0);
         break;
 
     case UART3_clk:
         /*FIFO INTERRUPCIÓN*/
-        UART3_IFLS_R = (FIFO_Tx & 0x07); //Int en la FIFO, parte de transmisión
-        UART3_IFLS_R = (FIFO_Rx & 0x038); //Int en la FIFO, parte de recepción
+        //UART3_IFLS_R = (FIFO_Tx & 0x07); //Int en la FIFO, parte de transmisión
+        //UART3_IFLS_R = (FIFO_Rx & 0x038); //Int en la FIFO, parte de recepción
 
         /*ENMASCARAMIENTO*/
         if(End_Tx == true)
@@ -317,6 +355,8 @@ void UART_Interrup(uint8_t UARTx_clk, uint8_t FIFO_Tx, uint8_t FIFO_Rx, bool End
         SET_BR(NVIC_PRI14_R, (Prio << 5));
 
         /*Inicializar*/
+        SET_BIT(UART3_CTL_R, 9); //Recepción
+        SET_BIT(UART3_CTL_R, 8); //Transmisión
         SET_BIT(UART3_CTL_R, 0);
         break;
 
@@ -342,13 +382,15 @@ void UART_Interrup(uint8_t UARTx_clk, uint8_t FIFO_Tx, uint8_t FIFO_Rx, bool End
         SET_BR(NVIC_PRI14_R, (Prio << 13));
 
         /*Inicializar*/
+        SET_BIT(UART4_CTL_R, 9); //Recepción
+        SET_BIT(UART4_CTL_R, 8); //Transmisión
         SET_BIT(UART4_CTL_R, 0);
         break;
 
     case UART5_clk:
         /*FIFO INTERRUPCIÓN*/
-        UART5_IFLS_R = (FIFO_Tx & 0x07); //Int en la FIFO, parte de transmisión
-        UART5_IFLS_R = (FIFO_Rx & 0x038); //Int en la FIFO, parte de recepción
+        //UART5_IFLS_R = (FIFO_Tx & 0x07); //Int en la FIFO, parte de transmisión
+        //UART5_IFLS_R = (FIFO_Rx & 0x038); //Int en la FIFO, parte de recepción
 
         /*ENMASCARAMIENTO*/
         if(End_Tx == true)
@@ -367,13 +409,15 @@ void UART_Interrup(uint8_t UARTx_clk, uint8_t FIFO_Tx, uint8_t FIFO_Rx, bool End
         SET_BR(NVIC_PRI14_R, (Prio << 21));
 
         /*Inicializar*/
+        SET_BIT(UART5_CTL_R, 9); //Recepción
+        SET_BIT(UART5_CTL_R, 8); //Transmisión
         SET_BIT(UART5_CTL_R, 0);
         break;
 
     case UART6_clk:
         /*FIFO INTERRUPCIÓN*/
-        UART6_IFLS_R = (FIFO_Tx & 0x07); //Int en la FIFO, parte de transmisión
-        UART6_IFLS_R = (FIFO_Rx & 0x038); //Int en la FIFO, parte de recepción
+        //UART6_IFLS_R = (FIFO_Tx & 0x07); //Int en la FIFO, parte de transmisión
+        //UART6_IFLS_R = (FIFO_Rx & 0x038); //Int en la FIFO, parte de recepción
 
         /*ENMASCARAMIENTO*/
         if(End_Tx == true)
@@ -392,13 +436,15 @@ void UART_Interrup(uint8_t UARTx_clk, uint8_t FIFO_Tx, uint8_t FIFO_Rx, bool End
         SET_BR(NVIC_PRI14_R, (Prio << 29));
 
         /*Inicializar*/
+        SET_BIT(UART6_CTL_R, 9); //Recepción
+        SET_BIT(UART6_CTL_R, 8); //Transmisión
         SET_BIT(UART6_CTL_R, 0);
         break;
 
     case UART7_clk:
         /*FIFO INTERRUPCIÓN*/
-        UART7_IFLS_R = (FIFO_Tx & 0x07); //Int en la FIFO, parte de transmisión
-        UART7_IFLS_R = (FIFO_Rx & 0x038); //Int en la FIFO, parte de recepción
+        //UART7_IFLS_R = (FIFO_Tx & 0x07); //Int en la FIFO, parte de transmisión
+        //UART7_IFLS_R = (FIFO_Rx & 0x038); //Int en la FIFO, parte de recepción
 
         /*ENMASCARAMIENTO*/
         if(End_Tx == true)
@@ -417,6 +463,8 @@ void UART_Interrup(uint8_t UARTx_clk, uint8_t FIFO_Tx, uint8_t FIFO_Rx, bool End
         SET_BR(NVIC_PRI15_R, (Prio << 5));
 
         /*Inicializar*/
+        SET_BIT(UART7_CTL_R, 9); //Recepción
+        SET_BIT(UART7_CTL_R, 8); //Transmisión
         SET_BIT(UART7_CTL_R, 0);
         break;
     }
