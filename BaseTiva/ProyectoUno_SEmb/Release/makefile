@@ -4,18 +4,21 @@
 
 SHELL = cmd.exe
 
-CG_TOOL_ROOT := C:/ti/ccs1220/ccs/tools/compiler/ti-cgt-arm_20.2.7.LTS
+CG_TOOL_ROOT := C:/ti/ccs1270/ccs/tools/compiler/ti-cgt-arm_20.2.7.LTS
 
 GEN_OPTS__FLAG := 
 GEN_CMDS__FLAG := 
 
 ORDERED_OBJS += \
 "./tm4c1294ncpdt_startup_ccs.obj" \
-"./Biblios/src/GPIO.obj" \
-"./Biblios/src/I2C.obj" \
-"./Biblios/src/NVIC.obj" \
-"./Biblios/src/UART.obj" \
-"./Biblios/src/main.obj" \
+"./src/GPIO.obj" \
+"./src/I2C.obj" \
+"./src/IEEE_CAN.obj" \
+"./src/NVIC.obj" \
+"./src/SSI.obj" \
+"./src/TIMER.obj" \
+"./src/UART.obj" \
+"./src/main.obj" \
 "../tm4c1294ncpdt.cmd" \
 $(GEN_CMDS__FLAG) \
 -llibc.a \
@@ -28,9 +31,9 @@ RMDIR := RMDIR /S/Q
 # All of the sources participating in the build are defined here
 -include sources.mk
 -include subdir_vars.mk
--include Biblios/src/subdir_vars.mk
+-include src/subdir_vars.mk
 -include subdir_rules.mk
--include Biblios/src/subdir_rules.mk
+-include src/subdir_rules.mk
 -include objects.mk
 
 ifneq ($(MAKECMDGOALS),clean)
@@ -127,10 +130,10 @@ endif
 
 # Add inputs and outputs from these tool invocations to the build variables 
 EXE_OUTPUTS += \
-ProyectoUno_SEmb.out \
+ProyectoUno_SEmb.out 
 
 EXE_OUTPUTS__QUOTED += \
-"ProyectoUno_SEmb.out" \
+"ProyectoUno_SEmb.out" 
 
 
 # All Target
@@ -141,15 +144,15 @@ all: $(OBJS) $(CMD_SRCS) $(GEN_CMDS)
 ProyectoUno_SEmb.out: $(OBJS) $(CMD_SRCS) $(GEN_CMDS)
 	@echo 'Building target: "$@"'
 	@echo 'Invoking: Arm Linker'
-	"C:/ti/ccs1220/ccs/tools/compiler/ti-cgt-arm_20.2.7.LTS/bin/armcl" -mv7M4 --code_state=16 --float_support=FPv4SPD16 -me -O2 --define=ccs="ccs" --define=PART_TM4C1294NCPDT --gcc --diag_warning=225 --diag_wrap=off --display_error_number --abi=eabi -z -m"ProyectoUno_SEmb.map" --heap_size=0 --stack_size=512 -i"C:/ti/ccs1220/ccs/tools/compiler/ti-cgt-arm_20.2.7.LTS/lib" -i"C:/ti/ccs1220/ccs/tools/compiler/ti-cgt-arm_20.2.7.LTS/include" --reread_libs --diag_wrap=off --display_error_number --warn_sections --xml_link_info="ProyectoUno_SEmb_linkInfo.xml" --rom_model -o "ProyectoUno_SEmb.out" $(ORDERED_OBJS)
+	"C:/ti/ccs1270/ccs/tools/compiler/ti-cgt-arm_20.2.7.LTS/bin/armcl" -mv7M4 --code_state=16 --float_support=FPv4SPD16 -me -O2 --define=ccs="ccs" --define=PART_TM4C1294NCPDT --gcc --diag_warning=225 --diag_wrap=off --display_error_number --abi=eabi -z -m"ProyectoUno_SEmb.map" --heap_size=0 --stack_size=512 -i"C:/ti/ccs1270/ccs/tools/compiler/ti-cgt-arm_20.2.7.LTS/lib" -i"C:/ti/ccs1270/ccs/tools/compiler/ti-cgt-arm_20.2.7.LTS/include" --reread_libs --diag_wrap=off --display_error_number --warn_sections --xml_link_info="ProyectoUno_SEmb_linkInfo.xml" --rom_model -o "ProyectoUno_SEmb.out" $(ORDERED_OBJS)
 	@echo 'Finished building target: "$@"'
 	@echo ' '
 
 # Other Targets
 clean:
 	-$(RM) $(EXE_OUTPUTS__QUOTED)
-	-$(RM) "tm4c1294ncpdt_startup_ccs.obj" "Biblios\src\GPIO.obj" "Biblios\src\I2C.obj" "Biblios\src\NVIC.obj" "Biblios\src\UART.obj" "Biblios\src\main.obj" 
-	-$(RM) "tm4c1294ncpdt_startup_ccs.d" "Biblios\src\GPIO.d" "Biblios\src\I2C.d" "Biblios\src\NVIC.d" "Biblios\src\UART.d" "Biblios\src\main.d" 
+	-$(RM) "tm4c1294ncpdt_startup_ccs.obj" "src\GPIO.obj" "src\I2C.obj" "src\IEEE_CAN.obj" "src\NVIC.obj" "src\SSI.obj" "src\TIMER.obj" "src\UART.obj" "src\main.obj" 
+	-$(RM) "tm4c1294ncpdt_startup_ccs.d" "src\GPIO.d" "src\I2C.d" "src\IEEE_CAN.d" "src\NVIC.d" "src\SSI.d" "src\TIMER.d" "src\UART.d" "src\main.d" 
 	-@echo 'Finished clean'
 	-@echo ' '
 
