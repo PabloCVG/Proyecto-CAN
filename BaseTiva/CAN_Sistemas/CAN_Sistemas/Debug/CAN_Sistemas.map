@@ -1,0 +1,245 @@
+******************************************************************************
+                  TI ARM Linker PC v20.2.5                     
+******************************************************************************
+>> Linked Tue Nov 14 15:41:45 2023
+
+OUTPUT FILE NAME:   <CAN_Sistemas.out>
+ENTRY POINT SYMBOL: "_c_int00_noargs"  address: 00000a7d
+
+
+MEMORY CONFIGURATION
+
+         name            origin    length      used     unused   attr    fill
+----------------------  --------  ---------  --------  --------  ----  --------
+  FLASH                 00000000   00100000  00000b3c  000ff4c4  R  X
+  SRAM                  20000000   00040000  00000244  0003fdbc  RW X
+
+
+SEGMENT ALLOCATION MAP
+
+run origin  load origin   length   init length attrs members
+----------  ----------- ---------- ----------- ----- -------
+00000000    00000000    00000b40   00000b40    r-x
+  00000000    00000000    00000208   00000208    r-- .intvecs
+  00000208    00000208    000008ec   000008ec    r-x .text
+  00000af8    00000af8    00000048   00000048    r-- .cinit
+20000000    20000000    00000248   00000000    rw-
+  20000000    20000000    00000200   00000000    rw- .stack
+  20000200    20000200    0000002c   00000000    rw- .data
+  20000230    20000230    00000018   00000000    rw- .bss
+
+
+SECTION ALLOCATION MAP
+
+ output                                  attributes/
+section   page    origin      length       input sections
+--------  ----  ----------  ----------   ----------------
+.intvecs   0    00000000    00000208     
+                  00000000    00000208     tm4c1294ncpdt_startup_ccs.obj (.intvecs)
+
+.text      0    00000208    000008ec     
+                  00000208    00000414     CAN_Practica_1294.obj (.text)
+                  0000061c    00000318     IEEE_CAN.obj (.text)
+                  00000934    0000009c     rtsv7M4_T_le_v4SPD16_eabi.lib : memcpy_t2.asm.obj (.text)
+                  000009d0    00000068                                   : copy_decompress_lzss.c.obj (.text:decompress:lzss:__TI_decompress_lzss)
+                  00000a38    00000044                                   : autoinit.c.obj (.text:__TI_auto_init_nobinit_nopinit:__TI_auto_init_nobinit_nopinit)
+                  00000a7c    00000034                                   : boot_cortex_m.c.obj (.text:_c_int00_noargs:_c_int00_noargs)
+                  00000ab0    0000001c                                   : copy_zero_init.c.obj (.text:decompress:ZI:__TI_zero_init_nomemset:__TI_zero_init_nomemset)
+                  00000acc    0000000e                                   : copy_decompress_none.c.obj (.text:decompress:none:__TI_decompress_none)
+                  00000ada    0000000c     tm4c1294ncpdt_startup_ccs.obj (.text)
+                  00000ae6    00000006     driverlib.lib : sysctl.obj (.text:SysCtlDelay)
+                  00000aec    00000004     rtsv7M4_T_le_v4SPD16_eabi.lib : pre_init.c.obj (.text:_system_pre_init)
+                  00000af0    00000004                                   : exit.c.obj (.text:abort:abort)
+
+.cinit     0    00000af8    00000048     
+                  00000af8    00000021     (.cinit..data.load) [load image, compression = lzss]
+                  00000b19    00000003     --HOLE-- [fill = 0]
+                  00000b1c    0000000c     (__TI_handler_table)
+                  00000b28    00000008     (.cinit..bss.load) [load image, compression = zero_init]
+                  00000b30    00000010     (__TI_cinit_table)
+
+.init_array 
+*          0    00000000    00000000     UNINITIALIZED
+
+.data      0    20000200    0000002c     UNINITIALIZED
+                  20000200    0000002c     CAN_Practica_1294.obj (.data)
+
+.bss       0    20000230    00000018     UNINITIALIZED
+                  20000230    00000018     (.common:Rx)
+
+.stack     0    20000000    00000200     UNINITIALIZED
+                  20000000    00000004     rtsv7M4_T_le_v4SPD16_eabi.lib : boot_cortex_m.c.obj (.stack)
+                  20000004    000001fc     --HOLE--
+
+__llvm_prf_cnts 
+*          0    20000000    00000000     UNINITIALIZED
+
+MODULE SUMMARY
+
+       Module                          code   ro data   rw data
+       ------                          ----   -------   -------
+    .\
+       CAN_Practica_1294.obj           1044   0         68     
+       IEEE_CAN.obj                    792    0         0      
+       tm4c1294ncpdt_startup_ccs.obj   12     520       0      
+    +--+-------------------------------+------+---------+---------+
+       Total:                          1848   520       68     
+                                                               
+    C:/ti/TivaWare_C_Series-2.2.0.295/driverlib/ccs/Debug/driverlib.lib
+       sysctl.obj                      6      0         0      
+    +--+-------------------------------+------+---------+---------+
+       Total:                          6      0         0      
+                                                               
+    C:\ti\ccs1120\ccs\tools\compiler\ti-cgt-arm_20.2.5.LTS\lib\rtsv7M4_T_le_v4SPD16_eabi.lib
+       memcpy_t2.asm.obj               156    0         0      
+       copy_decompress_lzss.c.obj      104    0         0      
+       autoinit.c.obj                  68     0         0      
+       boot_cortex_m.c.obj             52     0         0      
+       copy_zero_init.c.obj            28     0         0      
+       copy_decompress_none.c.obj      14     0         0      
+       exit.c.obj                      4      0         0      
+       pre_init.c.obj                  4      0         0      
+    +--+-------------------------------+------+---------+---------+
+       Total:                          430    0         0      
+                                                               
+       Stack:                          0      0         512    
+       Linker Generated:               0      69        0      
+    +--+-------------------------------+------+---------+---------+
+       Grand Total:                    2284   589       580    
+
+
+LINKER GENERATED COPY TABLES
+
+__TI_cinit_table @ 00000b30 records: 2, size/record: 8, table size: 16
+	.data: load addr=00000af8, load size=00000021 bytes, run addr=20000200, run size=0000002c bytes, compression=lzss
+	.bss: load addr=00000b28, load size=00000008 bytes, run addr=20000230, run size=00000018 bytes, compression=zero_init
+
+
+LINKER GENERATED HANDLER TABLE
+
+__TI_handler_table @ 00000b1c records: 3, size/record: 4, table size: 12
+	index: 0, handler: __TI_decompress_lzss
+	index: 1, handler: __TI_decompress_none
+	index: 2, handler: __TI_zero_init
+
+
+GLOBAL SYMBOLS: SORTED ALPHABETICALLY BY Name 
+
+address   name                          
+-------   ----                          
+20000201  C                             
+00000af1  C$$EXIT                       
+000002ff  CAN_Error                     
+0000067d  CAN_Memoria_Arb               
+000006c5  CAN_Memoria_CtrlMsk           
+0000061d  CAN_Memoria_Dato              
+00000769  CAN_Rx                        
+00000749  CAN_Tx                        
+20000208  Ciro                          
+000002c3  Config_CAN                    
+00000209  Config_Puertos                
+000003c9  GPIOPortJ_Handler             
+00000369  Inter_CAN0                    
+20000210  Jaime                         
+20000220  Joshua                        
+00000439  Leds                          
+20000218  Pablo                         
+00000adb  ResetISR                      
+20000230  Rx                            
+00000ae7  SysCtlDelay                   
+20000202  W                             
+20000200  __STACK_END                   
+00000200  __STACK_SIZE                  
+20000200  __STACK_TOP                   
+00000b30  __TI_CINIT_Base               
+00000b40  __TI_CINIT_Limit              
+00000b1c  __TI_Handler_Table_Base       
+00000b28  __TI_Handler_Table_Limit      
+00000a39  __TI_auto_init_nobinit_nopinit
+000009d1  __TI_decompress_lzss          
+00000acd  __TI_decompress_none          
+ffffffff  __TI_pprof_out_hndl           
+ffffffff  __TI_prof_data_size           
+ffffffff  __TI_prof_data_start          
+00000000  __TI_static_base__            
+00000ab1  __TI_zero_init_nomemset       
+00000935  __aeabi_memcpy                
+00000935  __aeabi_memcpy4               
+00000935  __aeabi_memcpy8               
+ffffffff  __binit__                     
+ffffffff  __c_args__                    
+UNDEFED   __mpu_init                    
+20000000  __stack                       
+20000000  __start___llvm_prf_cnts       
+20000000  __stop___llvm_prf_cnts        
+00000a7d  _c_int00_noargs               
+UNDEFED   _system_post_cinit            
+00000aed  _system_pre_init              
+00000af1  abort                         
+ffffffff  binit                         
+20000200  count_int                     
+00000000  g_pfnVectors                  
+00000481  main                          
+00000935  memcpy                        
+
+
+GLOBAL SYMBOLS: SORTED BY Symbol Address 
+
+address   name                          
+-------   ----                          
+00000000  __TI_static_base__            
+00000000  g_pfnVectors                  
+00000200  __STACK_SIZE                  
+00000209  Config_Puertos                
+000002c3  Config_CAN                    
+000002ff  CAN_Error                     
+00000369  Inter_CAN0                    
+000003c9  GPIOPortJ_Handler             
+00000439  Leds                          
+00000481  main                          
+0000061d  CAN_Memoria_Dato              
+0000067d  CAN_Memoria_Arb               
+000006c5  CAN_Memoria_CtrlMsk           
+00000749  CAN_Tx                        
+00000769  CAN_Rx                        
+00000935  __aeabi_memcpy                
+00000935  __aeabi_memcpy4               
+00000935  __aeabi_memcpy8               
+00000935  memcpy                        
+000009d1  __TI_decompress_lzss          
+00000a39  __TI_auto_init_nobinit_nopinit
+00000a7d  _c_int00_noargs               
+00000ab1  __TI_zero_init_nomemset       
+00000acd  __TI_decompress_none          
+00000adb  ResetISR                      
+00000ae7  SysCtlDelay                   
+00000aed  _system_pre_init              
+00000af1  C$$EXIT                       
+00000af1  abort                         
+00000b1c  __TI_Handler_Table_Base       
+00000b28  __TI_Handler_Table_Limit      
+00000b30  __TI_CINIT_Base               
+00000b40  __TI_CINIT_Limit              
+20000000  __stack                       
+20000000  __start___llvm_prf_cnts       
+20000000  __stop___llvm_prf_cnts        
+20000200  __STACK_END                   
+20000200  __STACK_TOP                   
+20000200  count_int                     
+20000201  C                             
+20000202  W                             
+20000208  Ciro                          
+20000210  Jaime                         
+20000218  Pablo                         
+20000220  Joshua                        
+20000230  Rx                            
+ffffffff  __TI_pprof_out_hndl           
+ffffffff  __TI_prof_data_size           
+ffffffff  __TI_prof_data_start          
+ffffffff  __binit__                     
+ffffffff  __c_args__                    
+ffffffff  binit                         
+UNDEFED   __mpu_init                    
+UNDEFED   _system_post_cinit            
+
+[54 symbols]
